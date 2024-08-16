@@ -1,0 +1,114 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Sample Schema",
+    "title": "Action Guardian",
+    "version": "1.0.0"
+  },
+  "basePath": "/v1",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/getfunny": {
+      "get": {
+        "summary": "Check if the API is funny",
+        "description": "Cool description",
+        "operationId": "GetFunny",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "default": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "/isready": {
+      "get": {
+        "summary": "Check if the API is available for use by end user",
+        "description": "Tells when API has collected from different sources and has run the validations.",
+        "operationId": "GetStatus",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "default": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "/safetodowork": {
+      "get": {
+        "summary": "returns result of the user defined validations",
+        "operationId": "IsItSafeToDoWork",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "default": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Status": {
+      "type": "object",
+      "properties": {
+        "reachable": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "Result": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "example": true
+        },
+        "lastDataRefresh": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2017-07-21T17:32:28.000Z"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Some_Error"
+        },
+        "message": {
+          "type": "string",
+          "example": "Some error description"
+        }
+      }
+    }
+  }
+}
